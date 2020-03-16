@@ -4,6 +4,7 @@ const path = require('path')
 const express = require('express')
 
 const app = express()
+const port = process.env.PORT || 4000
 
 const pathDirectory = path.join(__dirname,'../public')
 const helpPath = path.join(pathDirectory,'help.html')
@@ -54,6 +55,14 @@ app.get('/weather',(req,res) => {
     })
 })
 
-app.listen(4000,() => {
-    console.log('port listening at 4000')
+app.get('*',(req,res) => {
+    res.render('404',{
+        title: '404',
+        name: 'Anand Raj',
+        errorMessage: 'Page not found'
+    })
+})
+
+app.listen(port,() => {
+    console.log('port listening at '+port)
 })
